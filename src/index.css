@@ -49,6 +49,10 @@ ol, ul {
   margin-left: 20px;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .container {
   width: 330px;
   margin: 20px auto;
