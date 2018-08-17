@@ -148,11 +148,43 @@ function calculateWinner(squares) {
 // ========================================
 // 以下はドットインストールのコード
 
-const name = 'neko';
+class Counter extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+    }
+  }
+
+  countUp() {
+    this.setState(prevState => {
+      return {
+        count: prevState.count +1
+      };
+    });
+  }
+
+  render() {
+    return (
+      <li
+        style={{backgroundColor: this.props.color}}
+        onClick={() =>this.countUp()}
+      >
+        {this.state.count}
+      </li>
+    );
+  }
+}
+
+const name = 'React入門';
 ReactDOM.render(
-  <div>
-    <p>Hello! {name}</p>
-    <p>Hello! {name}</p>
+  <div className="container">
+    <h1>{name}</h1>
+    <ul>
+      <Counter color="tomato" />
+      <Counter color="skyblue" />
+      <Counter color="limegreen" />
+    </ul>
   </div>,
   document.getElementById('dotinstall')
 );
