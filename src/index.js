@@ -144,3 +144,15 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
+// ========================================
+// 以下はドットインストールのコード
+
+const name = 'neko';
+ReactDOM.render(
+  <div>
+    <p>Hello! {name}</p>
+    <p>Hello! {name}</p>
+  </div>,
+  document.getElementById('dotinstall')
+);
