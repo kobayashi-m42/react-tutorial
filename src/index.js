@@ -48,6 +48,7 @@ class Game extends React.Component {
     this.state = {
       history: [{
         squares: Array(9).fill(null),
+        position: null,
       }],
       stepNumber: 0,
       xIsNext: true,
@@ -65,6 +66,7 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([{
         squares: squares,
+        position: i
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
@@ -84,8 +86,9 @@ class Game extends React.Component {
     const winner = calculateWinner(current.squares);
 
     const move = history.map((step, move) => {
+      const locationFormat = createLocationFormat(step.position);
       const desc = move ?
-        'Go to move #' + move :
+        `Go to move # ${move} ${locationFormat}`:
         'Go to game start';
       return (
         <li key={move}>
@@ -145,6 +148,11 @@ function calculateWinner(squares) {
   return null;
 }
 
+function createLocationFormat(position) {
+  const column = position % 3 + 1;
+  const row = Math.floor(position / 3 + 1);
+  return `col:${column} row:${row}`;
+}
 // ========================================
 // 以下はドットインストールのコード
 
