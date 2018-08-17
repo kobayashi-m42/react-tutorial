@@ -144,3 +144,82 @@ function calculateWinner(squares) {
   }
   return null;
 }
+
+// ========================================
+// 以下はドットインストールのコード
+
+function Counter(props) {
+  return (
+    <li
+      style={{backgroundColor: props.counter.color}}
+      onClick={() => props.onClick(props.counter)}
+    >
+      {props.counter.id}:{props.counter.count}
+    </li>
+  );
+}
+
+function CounterList(props) {
+  const counters = props.counters.map(counter => {
+    return (
+      <Counter
+        counter={counter}
+        key={counter.id}
+        onClick={props.onClick}
+      />
+    );
+  });
+
+  return (
+    <ul>
+      {counters}
+    </ul>
+  );
+}
+
+class App extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      counters: [
+        {id: 'A', count: 0, color: 'tomato'},
+        {id: 'B', count: 0, color: 'skyblue'},
+        {id: 'C', count: 0, color: 'limegreen'},
+      ],
+      total: 0,
+    };
+  }
+
+  handleClick(counter){
+    const counters = this.state.counters.slice();
+    const position = counters.map(counter => {
+      return counter.id;
+    }).indexOf(counter.id);
+    counters[position].count += 1;
+
+    this.setState(prevState => {
+      return {
+        counters: counters,
+        total: prevState.total + 1,
+      };
+    });
+  }
+
+  render() {
+    return (
+      <div className="container">
+        <h1>React入門</h1>
+          <CounterList
+            counters={this.state.counters}
+            onClick={counter => this.handleClick(counter)}
+          />
+        <div>TOTAL INVENTORY {this.state.total}</div>
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('dotinstall')
+);
