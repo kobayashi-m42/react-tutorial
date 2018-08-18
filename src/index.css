@@ -53,6 +53,10 @@ ol, ul {
   font-weight: bold;
 }
 
+.highlight {
+  background: skyblue;
+}
+
 .container {
   width: 330px;
   margin: 20px auto;
