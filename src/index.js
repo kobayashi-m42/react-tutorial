@@ -10,6 +10,12 @@ function Square(props) {
   );
 }
 
+function Toggle(props) {
+  return (
+    <button onClick={props.onClick}>Toggle</button>
+  );
+}
+
 class Board extends React.Component {
   renderSquare(i) {
     return (
@@ -48,6 +54,7 @@ class Game extends React.Component {
       }],
       stepNumber: 0,
       xIsNext: true,
+      movesIsAsc: true,
     }
   }
 
@@ -67,6 +74,12 @@ class Game extends React.Component {
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
     })
+  }
+
+  handleToggleClick() {
+    this.setState({
+      movesIsAsc: !this.state.movesIsAsc,
+    });
   }
 
   jumpTo(step) {
@@ -95,6 +108,10 @@ class Game extends React.Component {
       );
     });
 
+    if(!this.state.movesIsAsc) {
+      move.reverse();
+    }
+
     let status;
     if (winner) {
       status = `Winner: ${winner}`;
@@ -112,6 +129,9 @@ class Game extends React.Component {
         </div>
         <div className="game-info">
           <div>{status}</div>
+          <div>
+            <Toggle onClick={() => this.handleToggleClick()}/>
+          </div>
           <ol>{move}</ol>
         </div>
       </div>
